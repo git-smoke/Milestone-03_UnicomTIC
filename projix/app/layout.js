@@ -1,5 +1,8 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "projix",
@@ -9,13 +12,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className={`${inter.className}`}>
+        <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
       </body>
