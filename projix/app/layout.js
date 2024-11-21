@@ -14,7 +14,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
+          {/* header */}
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <footer className="bg-gray-900 py-12">
+            <div className="container mx-auto text-center text-gray-200">
+              <p>Made With 💗 Sankeerthan Dayanidi</p>
+            </div>
+          </footer>
         </ThemeProvider>
       </body>
     </html>
