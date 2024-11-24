@@ -3,7 +3,16 @@ import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 const Header = () => {
   return (
-    <div>
+    <header>
+      <nav>
+
+      </nav>
+ 
+ 
+ 
+ 
+ 
+ 
       <SignedOut>
         <SignInButton />
       </SignedOut>
@@ -11,7 +20,7 @@ const Header = () => {
       <SignedIn>
         <UserButton />
       </SignedIn>
-    </div>
+    </header>
   );
 };
 
