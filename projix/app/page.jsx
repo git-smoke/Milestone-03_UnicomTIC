@@ -1,3 +1,4 @@
+import CompanyCarousel from "@/components/company-carousel";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -89,10 +90,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="bg-gray-900 py-20 px-5">
+      <section className="py-20">
         <div className="container mx-auto">
-          <h3 className="text-3xl font-bold mb-12 text-center">Key Features</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
+          <h3 className="text-3xl font-bold mb-12 text-center">
+            Trusted by Industry Leaders
+          </h3>
+          <CompanyCarousel />
         </div>
       </section>
     </div>
