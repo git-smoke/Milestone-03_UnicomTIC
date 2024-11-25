@@ -29,6 +29,12 @@ export default function Home() {
             Get Started <ChevronRight size={18} className="ml-1" />
           </Button>
         </Link>
+        <Link href="/onboarding">
+          {" "}
+          <Button size="lg" variant="outline" className="mr-4">
+            Learn More
+          </Button>
+        </Link>
       </section>
     </div>
   );
