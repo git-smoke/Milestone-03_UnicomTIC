@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       {/* Hero Section*/}
       <section className="">
-        <h1>Hello</h1>
+        <h1>Streamline Your Workflow</h1>
       </section>
     </div>
   );
