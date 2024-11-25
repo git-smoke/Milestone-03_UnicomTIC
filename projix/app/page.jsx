@@ -22,11 +22,13 @@ export default function Home() {
             />
           </span>
         </h1>
-        <p>Empower your team with our intuitive project management solution.</p>
+        <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+          Empower your team with our intuitive project management solution.
+        </p>
         <Link href="/onboarding">
           {" "}
-          <Button size="lg" className="mr-4">
-            Get Started <ChevronRight size={18} className="ml-1" />
+          <Button size="lg" className="mr-2">
+            Get Started <ChevronRight size={18} className="" />
           </Button>
         </Link>
         <Link href="/onboarding">
