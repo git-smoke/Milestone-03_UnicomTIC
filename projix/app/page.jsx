@@ -19,6 +19,7 @@ export default function Home() {
             />
           </span>
         </h1>
+        <p>Empower your team with our intuitive project management solution.</p>
       </section>
     </div>
   );
