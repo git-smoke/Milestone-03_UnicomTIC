@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
+  id             String   @id @default(cuid()) //shorter than uuid 
   clerkUserId    String   @unique
   email          String   @unique
   name           String?
@@ -24,3 +24,19 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model Project {
+  id             String   @id @default(cuid())
+  name           String
+  key            String
+  description    String?
+  organizationId String //this will store clerk org ID
+  sprints        Sprint[]
+  issues         Issue[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([organizationId, key])
+}
+
+
