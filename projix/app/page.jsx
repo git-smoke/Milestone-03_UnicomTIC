@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, ChevronRight, Layout } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { BarChart, Calendar, ChevronRight, Layout } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,7 +28,7 @@ const features = [
     title: "Comprehensive Reporting",
     description:
       "Gain insights into your team's performance with detailed, customizable reports and analytics",
-    icon: Calendar,
+    icon: BarChart,
   },
 ];
 
@@ -60,10 +68,20 @@ export default function Home() {
         </Link>
       </section>
 
-      <section>
-        <div>
-          <h3>Key Features</h3>
-          <div></div>
+      <section id="features" className="bg-gray-900 py-20 px-5">
+        <div className="container mx-auto">
+          <h3 className="text-3xl font-bold mb-12 text-center">Key Features</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => {
+              return (
+                <Card key={index}>
+                  <CardContent>
+                    <feature.icon className="h-12 w-12 mb-4 text-blue-300" />
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>
