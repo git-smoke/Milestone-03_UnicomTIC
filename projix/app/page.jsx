@@ -80,14 +80,19 @@ export default function Home() {
                     <h4 className="text-xl font-semibold mb-2">
                       {feature.title}
                     </h4>
-                    <p className="text-gray-300">
-                      {feature.description}
-                    </p>
+                    <p className="text-gray-300">{feature.description}</p>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section id="features" className="bg-gray-900 py-20 px-5">
+        <div className="container mx-auto">
+          <h3 className="text-3xl font-bold mb-12 text-center">Key Features</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
         </div>
       </section>
     </div>
