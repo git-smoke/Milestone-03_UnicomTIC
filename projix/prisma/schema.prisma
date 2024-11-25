@@ -51,3 +51,9 @@ model Sprint {
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 }
+
+enum SprintStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+}
