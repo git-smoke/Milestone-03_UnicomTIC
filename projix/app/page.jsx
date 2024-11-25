@@ -1,7 +1,28 @@
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { Calendar, ChevronRight, Layout } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+const features = [
+  {
+    title: "Intutive Kanban Boards",
+    description:
+      "Visualize your workflow and optimize team productivity with out easy-to-use Kanban boards.",
+    icon: Layout,
+  },
+  {
+    title: "Powerful Sprint Planning",
+    description:
+      "Plan and manage sprints effectively, ensuring your team stays focused on delivering value.",
+    icon: Calendar,
+  },
+  {
+    title: "Comprehensive Reporting",
+    description:
+      "Gain insights into your team's performance with detailed, customizable reports and analytics",
+    icon: Calendar,
+  },
+];
 
 export default function Home() {
   return (
@@ -37,6 +58,13 @@ export default function Home() {
             Learn More
           </Button>
         </Link>
+      </section>
+
+      <section>
+        <div>
+          <h3>Key Features</h3>
+          <div></div>
+        </div>
       </section>
     </div>
   );
