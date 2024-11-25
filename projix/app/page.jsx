@@ -75,8 +75,14 @@ export default function Home() {
             {features.map((feature, index) => {
               return (
                 <Card key={index}>
-                  <CardContent>
+                  <CardContent className="pt-6">
                     <feature.icon className="h-12 w-12 mb-4 text-blue-300" />
+                    <h4 className="text-xl font-semibold mb-2">
+                      {feature.title}
+                    </h4>
+                    <p className="text-gray-300">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               );
