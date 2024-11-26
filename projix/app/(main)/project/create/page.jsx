@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 const CreateProjectPage = () => {
   return <div>CreateProjectPage</div>;
