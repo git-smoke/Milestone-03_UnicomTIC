@@ -16,7 +16,7 @@ export async function createProject(data) {
 
   const { data: membership } =
     await clerkClient().organizations.getOrganizationMembershipList({
-      organizationId: organization.id,
+      organizationId: orgId,
     });
 
   const userMembership = membership.find(
