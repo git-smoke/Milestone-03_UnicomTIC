@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { projectSchema } from "@/app/lib/validators";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const CreateProjectPage = () => {
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
@@ -32,6 +34,8 @@ const CreateProjectPage = () => {
     return <div>Loading...</div>;
   }
 
+  const onSubmit = async () => {};
+
   if (!isAdmin) {
     return (
       <div className="flex flex-col gap-2 items-center">
@@ -49,18 +53,45 @@ const CreateProjectPage = () => {
         Create New Project
       </h1>
 
-      <form action="">
-        <div>
-          <Input
-            id="name"
-            className="bg-slate-950"
-            placeholder="Project Name"
-            {...register("name")}
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-          )}
-        </div>
+      <form
+        className="flex flex-col space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Input
+          id="name"
+          className="bg-slate-950"
+          placeholder="Project Name"
+          {...register("name")}
+        />
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+        )}
+
+        <Input
+          id="key"
+          className="bg-slate-950"
+          placeholder="Project Key (Ex: RCYT)"
+          {...register("key")}
+        />
+        {errors.key && (
+          <p className="text-red-500 text-sm mt-1">{errors.key.message}</p>
+        )}
+
+        <Textarea
+          id="description"
+          className="bg-slate-950 h-28"
+          placeholder="Project Description"
+          {...register("description")}
+        />
+        {errors.description && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.description.message}
+          </p>
+        )}
+
+        <Button type="submit" size="lg" className="bg-blue-500 text-white">
+          Create Project
+        </Button>
       </form>
     </div>
   );
