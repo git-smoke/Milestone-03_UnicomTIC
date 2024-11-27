@@ -3,7 +3,7 @@ import { Link } from "next/link";
 export default async function ProjectList({ orgId }) {
   const projects = await getProject(orgId);
 
-  if (projects.length === 0) {
+  if (projects.length !== 0) {
     return (
       <p>
         No Projects Found.{""}
