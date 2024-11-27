@@ -10,11 +10,16 @@ import { projectSchema } from "@/app/lib/validators";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import useFetch from "@/hooks/use-fetch";
+import { createProject } from "@/actions/projects";
+import { toast, Toaster } from "sonner";
+import { useRouter } from "next/navigation";
 
 const CreateProjectPage = () => {
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -30,11 +35,27 @@ const CreateProjectPage = () => {
     }
   }, [isOrgLoaded, isUserLoaded, membership]);
 
+  const {
+    data: project,
+    loading,
+    error,
+    fn: createProjectfn,
+  } = useFetch(createProject);
+
+  useEffect(() => {
+    if (project) {
+      toast.success("Project Created Succesfully");
+      router.push(`/project/${project.id}`);
+    }
+  }, []);
+
   if (!isOrgLoaded || !isUserLoaded) {
     return <div>Loading...</div>;
   }
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data) => {
+    createProjectfn(data);
+  };
 
   if (!isAdmin) {
     return (
@@ -89,9 +110,15 @@ const CreateProjectPage = () => {
           </p>
         )}
 
-        <Button type="submit" size="lg" className="bg-blue-500 text-white">
-          Create Project
+        <Button
+          disabled={loading}
+          type="submit"
+          size="lg"
+          className="bg-blue-500 text-white"
+        >
+          {loading ? "Creating..." : "Create Project"}
         </Button>
+        {error && <p className="text-red-500 mt-2">{error.message}</p>}
       </form>
     </div>
   );
