@@ -4,11 +4,17 @@ import OrgSwitcher from "@/components/org-switcher";
 import { useOrganization, useUser } from "@clerk/nextjs";
 
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 
 const CreateProjectPage = () => {
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
+
+  useForm({
+    resolver: zodResolver,
+  });
 
   useEffect(() => {
     if (isOrgLoaded && isUserLoaded && membership) {
