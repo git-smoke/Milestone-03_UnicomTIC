@@ -5,15 +5,21 @@ import { useOrganization, useUser } from "@clerk/nextjs";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { projectSchema } from "@/app/lib/validators";
+import { Input } from "@/components/ui/input";
 
 const CreateProjectPage = () => {
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useForm({
-    resolver: zodResolver,
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(projectSchema),
   });
 
   useEffect(() => {
@@ -43,7 +49,19 @@ const CreateProjectPage = () => {
         Create New Project
       </h1>
 
-      <form action=""></form>
+      <form action="">
+        <div>
+          <Input
+            id="name"
+            className="bg-slate-950"
+            placeholder="Project Name"
+            {...register("name")}
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+      </form>
     </div>
   );
 };
