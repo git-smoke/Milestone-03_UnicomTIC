@@ -34,9 +34,7 @@ export async function createProject(data) {
         organizationId: orgId,
       },
     });
-
-    return project;
   } catch (error) {
-    throw new Error("Error creating project: " + error.message);
+    throw new Error("Error creating project" + error.message);
   }
 }
