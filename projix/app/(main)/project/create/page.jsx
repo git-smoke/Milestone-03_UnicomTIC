@@ -1,25 +1,25 @@
 "use client";
 
-import OrgSwitcher from "@/components/org-switcher";
-import { useOrganization, useUser } from "@clerk/nextjs";
-
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { projectSchema } from "@/app/lib/validators";
+import { useRouter } from "next/navigation";
+import { useOrganization, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
+import { projectSchema } from "@/app/lib/validators";
 import { createProject } from "@/actions/projects";
-import { toast, Toaster } from "sonner";
-import { useRouter } from "next/navigation";
+import { BarLoader } from "react-spinners";
+import OrgSwitcher from "@/components/org-switcher";
+import { toast } from "sonner";
 
-const CreateProjectPage = () => {
+export default function CreateProjectPage() {
+  const router = useRouter();
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
-  const router = useRouter();
 
   const {
     register,
@@ -36,26 +36,31 @@ const CreateProjectPage = () => {
   }, [isOrgLoaded, isUserLoaded, membership]);
 
   const {
-    data: project,
     loading,
     error,
-    fn: createProjectfn,
+    data: project,
+    fn: createProjectFn,
   } = useFetch(createProject);
+
+  const onSubmit = async (data) => {
+    if (!isAdmin) {
+      alert("Only organization admins can create projects");
+      return;
+    }
+
+    createProjectFn(data);
+  };
 
   useEffect(() => {
     if (project) {
       toast.success("Project Created Succesfully");
       router.push(`/project/${project.id}`);
     }
-  }, []);
+  }, [loading]);
 
   if (!isOrgLoaded || !isUserLoaded) {
-    return <div>Loading...</div>;
+    return null;
   }
-
-  const onSubmit = async (data) => {
-    createProjectfn(data);
-  };
 
   if (!isAdmin) {
     return (
@@ -75,45 +80,51 @@ const CreateProjectPage = () => {
       </h1>
 
       <form
-        className="flex flex-col space-y-4"
         onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col space-y-4"
       >
-        <Input
-          id="name"
-          className="bg-slate-950"
-          placeholder="Project Name"
-          {...register("name")}
-        />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+        <div>
+          <Input
+            id="name"
+            {...register("name")}
+            className="bg-slate-950"
+            placeholder="Project Name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+        <div>
+          <Input
+            id="key"
+            {...register("key")}
+            className="bg-slate-950"
+            placeholder="Project Key (Ex: RCYT)"
+          />
+          {errors.key && (
+            <p className="text-red-500 text-sm mt-1">{errors.key.message}</p>
+          )}
+        </div>
+        <div>
+          <Textarea
+            id="description"
+            {...register("description")}
+            className="bg-slate-950 h-28"
+            placeholder="Project Description"
+          />
+          {errors.description && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.description.message}
+            </p>
+          )}
+        </div>
+        {loading && (
+          <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
         )}
-
-        <Input
-          id="key"
-          className="bg-slate-950"
-          placeholder="Project Key (Ex: RCYT)"
-          {...register("key")}
-        />
-        {errors.key && (
-          <p className="text-red-500 text-sm mt-1">{errors.key.message}</p>
-        )}
-
-        <Textarea
-          id="description"
-          className="bg-slate-950 h-28"
-          placeholder="Project Description"
-          {...register("description")}
-        />
-        {errors.description && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.description.message}
-          </p>
-        )}
-
         <Button
-          disabled={loading}
           type="submit"
           size="lg"
+          disabled={loading}
           className="bg-blue-500 text-white"
         >
           {loading ? "Creating..." : "Create Project"}
@@ -122,6 +133,4 @@ const CreateProjectPage = () => {
       </form>
     </div>
   );
-};
-
-export default CreateProjectPage;
+}
