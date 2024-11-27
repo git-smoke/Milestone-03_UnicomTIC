@@ -44,7 +44,7 @@ export async function createProject(data) {
   }
 }
 
-export async function getProjectss(orgId) {
+export async function getProjects(orgId) {
   const { userId } = auth();
   if (!userId) {
     throw new Error("Unauthorized");
