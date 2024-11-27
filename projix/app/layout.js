@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/header";
 import { shadesOfPurple } from "@clerk/themes";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,10 +24,10 @@ export default function RootLayout({ children }) {
           colorInputBackground: "#2D3748",
           colorInputText: "#f3f4f6",
         },
-        elements:{
+        elements: {
           formButtonPrimary: "text-white",
-          card:"bg-gray-800"
-        }
+          card: "bg-gray-800",
+        },
       }}
     >
       <html lang="en">
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Header />
             <main className="min-h-screen">{children}</main>
+            <Toaster richColors />
             <footer className="bg-gray-900 py-12">
               <div className="container mx-auto px-4 text-center text-gray-200">
                 <p>Made with 💗 by Sankeerthan</p>
