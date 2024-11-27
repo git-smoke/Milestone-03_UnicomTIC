@@ -1,9 +1,6 @@
-import React from 'react'
-
+"use client";
 const CreateProjectPage = () => {
-  return (
-    <div>CreateProjectPage</div>
-  )
-}
+  return <div>CreateProjectPage</div>;
+};
 
-export default CreateProjectPage
+export default CreateProjectPage;
