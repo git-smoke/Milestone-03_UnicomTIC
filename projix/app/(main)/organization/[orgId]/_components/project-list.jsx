@@ -1,7 +1,10 @@
-import { getProject } from "@/actions/projects";
+""
+
+import { getProjects } from "@/actions/projects";
 import { Link } from "next/link";
+
 export default async function ProjectList({ orgId }) {
-  const projects = await getProject(orgId);
+  const projects = await getProjects(orgId);
 
   if (projects.length !== 0) {
     return (

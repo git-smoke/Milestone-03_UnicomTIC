@@ -1,4 +1,4 @@
-import { getOrganization } from "@/actions/organization";
+import { getOrganization } from "@/actions/organizations";
 import OrgSwitcher from "@/components/org-switcher";
 import React from "react";
 import ProjectList from "./_components/project-list";
