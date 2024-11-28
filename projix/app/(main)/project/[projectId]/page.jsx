@@ -11,19 +11,25 @@ const ProjectPage = async ({ params }) => {
     notFound();
   }
 
-  return <div>{/*Sprint Creation Component*/}
+  return (
+    <div className="container mx-auto">
+      {/*Sprint Creation Component*/}
 
-    {/* Sprint Board */}
-    {
-      project.sprints.length > 0? (
+      <SprintCreationForm
+        projectTitle={project.name}
+        projectId={projectId}
+        projectKey={project.key}
+        sprintKey={project.sprints?.length + 1}
+      />
+
+      {/* Sprint Board */}
+      {project.sprints.length > 0 ? (
         <></>
       ) : (
-        <div>
-          Create a Sprint from button above
-        </div>
-      )
-    }
-  </div>;
+        <div>Create a Sprint from button above</div>
+      )}
+    </div>
+  );
 };
 
 export default ProjectPage;
