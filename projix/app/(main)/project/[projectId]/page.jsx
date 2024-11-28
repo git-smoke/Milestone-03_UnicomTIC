@@ -11,7 +11,19 @@ const ProjectPage = async ({ params }) => {
     notFound();
   }
 
-  return <div>ProjectPage</div>;
+  return <div>{/*Sprint Creation Component*/}
+
+    {/* Sprint Board */}
+    {
+      project.sprints.length > 0? (
+        <></>
+      ) : (
+        <div>
+          Create a Sprint from button above
+        </div>
+      )
+    }
+  </div>;
 };
 
 export default ProjectPage;
