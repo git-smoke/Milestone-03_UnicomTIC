@@ -1,11 +1,32 @@
-"use client"
+"use client";
 
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
 
-const SprintCreationForm = () => {
+const SprintCreationForm = ({
+  projectTitle,
+  projectKey,
+  projectId,
+  sprintKey,
+}) => {
+  const [showForm, setShowForm] = useState(false);
+
   return (
-    <div>SprintCreationForm</div>
-  )
-}
+    <>
+      <div>
+        <h1>{projectTitle}</h1>
+        <Button
+          className="mt-2"
+          onClick={() => setShowForm(!showForm)}
+          variant={showForm ? "destructive" : "default"}
+        >
+          {showForm ? "Cancel" : "Create New Sprint"}
+        </Button>
+      </div>
 
-export default SprintCreationForm
+      {showForm && <>form</>}
+    </>
+  );
+};
+
+export default SprintCreationForm;
