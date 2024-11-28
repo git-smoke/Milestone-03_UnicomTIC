@@ -1,6 +1,7 @@
 import { getProject } from "@/actions/projects";
 import { notFound } from "next/navigation";
 import React from "react";
+import SprintCreationForm from "../_components/create-sprint";
 
 const ProjectPage = async ({ params }) => {
   const { projectId } = params;
