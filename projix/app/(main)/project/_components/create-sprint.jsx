@@ -1,7 +1,12 @@
 "use client";
 
+import { createSprint } from "@/actions/sprints";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDays } from "date-fns";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const SprintCreationForm = ({
   projectTitle,
@@ -10,6 +15,20 @@ const SprintCreationForm = ({
   sprintKey,
 }) => {
   const [showForm, setShowForm] = useState(false);
+
+  const [dateRange, setDateRange] = useState({
+    from: new Date(),
+    to: addDays(new Date(), 14),
+  });
+
+  useForm({
+    resolver: zodResolver(createSprint),
+    defaultValues: {
+      name: `${projectKey}-${sprintKey}`,
+      startDate: dateRange.from,
+      endDate: dateRange.to,
+    },
+  });
 
   return (
     <>
@@ -24,7 +43,11 @@ const SprintCreationForm = ({
         </Button>
       </div>
 
-      {showForm && <>form</>}
+      {showForm && <Card>
+            <CardContent>
+                <form action=""></form>
+            </CardContent>
+        </Card>}
     </>
   );
 };
