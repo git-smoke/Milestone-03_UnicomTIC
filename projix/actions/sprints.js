@@ -15,4 +15,20 @@ export async function createSprint(projectId, data) {
       id: projectId,
     },
   });
+
+  if (!project || project.organizationId !== orgId) {
+    throw new Error("Project not found");
+  }
+
+  const sprint = await db.sprint.create({
+    data: {
+      name: data.name,
+      startDate: data.startDate,
+      endDate: data.endDate,
+      status: "PLANNED",
+      projectId,
+    },
+  });
+
+  return sprint;
 }
