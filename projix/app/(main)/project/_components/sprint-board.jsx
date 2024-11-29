@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
+import SprintManager from "./sprint-manager";
 
 const SprintBoard = ({ sprints, pojectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
