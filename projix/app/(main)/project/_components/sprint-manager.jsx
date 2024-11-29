@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectValue,
@@ -49,6 +50,8 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
         {canStart && (
           <Button className="bg-green-900 text-white">Start Sprint</Button>
         )}
+
+        {canEnd && <Button variant="destructive">End Sprint</Button>}
       </div>
     </>
   );
