@@ -16,6 +16,10 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller, useForm } from "react-hook-form";
 import "react-day-picker/dist/style.css";
+import useFetch from "@/hooks/use-fetch";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { sprintSchema } from "@/app/lib/validators";
 
 const SprintCreationForm = ({
   projectTitle,
@@ -30,19 +34,35 @@ const SprintCreationForm = ({
     to: addDays(new Date(), 14),
   });
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
-    resolver: zodResolver(createSprint),
+    resolver: zodResolver(sprintSchema),
     defaultValues: {
       name: `${projectKey}-${sprintKey}`,
       startDate: dateRange.from,
       endDate: dateRange.to,
     },
   });
+
+  const { loading: createSprintLoading, fn: createSprintfn } =
+    useFetch(createSprint);
+
+  const onSubmit = async (data) => {
+    await createSprintfn(projectId, {
+      ...data,
+      startDate: dateRange.from,
+      endDate: dateRange.to,
+    });
+    setShowForm(false);
+    toast.success("Sprint Created Successfully");
+    router.refresh();
+  };
 
   return (
     <>
@@ -62,7 +82,11 @@ const SprintCreationForm = ({
       {showForm && (
         <Card className="pt-4 mb-4">
           <CardContent>
-            <form action="" className="flex gap-4 items-end">
+            <form
+              action=""
+              className="flex gap-4 items-end"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="flex-1">
                 <label
                   htmlFor="name"
@@ -139,6 +163,9 @@ const SprintCreationForm = ({
                   }}
                 />
               </div>
+              <Button type="submit" disabled={createSprintLoading}>
+                {createSprintLoading ? "Creating..." : "Create Sprint"}
+              </Button>
             </form>
           </CardContent>
         </Card>
