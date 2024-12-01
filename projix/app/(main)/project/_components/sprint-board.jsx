@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SprintManager from "./sprint-manager";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import statuses from "@/data/statuses";
@@ -10,6 +10,7 @@ import IssueCreationDrawer from "./create-issue";
 import useFetch from "@/hooks/use-fetch";
 import { getIssuesForSprint } from "@/actions/issues";
 import { issue } from "@uiw/react-md-editor";
+import { BarLoader } from "react-spinners";
 
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
@@ -58,6 +59,9 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
         projectId={projectId}
       />
 
+      {issuesLoading && (
+        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+      )}
       {/* Kandban Board */}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 bg-slate-900 p-4 rounded-lg">
