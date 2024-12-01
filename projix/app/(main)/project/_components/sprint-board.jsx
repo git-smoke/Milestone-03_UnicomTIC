@@ -100,10 +100,30 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
       reorderedCards.forEach((card, i) => {
         card.order = i;
       });
+    } else {
+      //remove card from the source list
+      const [moveCard] = sourceList.splice(source.index, 1);
+
+      //assign the new list id to the moved card
+      movedCard.status = destination.droppableId;
+
+      //add new card to the destinationlist
+      destinationList.splice(destination.index, 0, moveCard);
+
+      sourceList.forEach((card, i) => {
+        card.order = i;
+      });
+
+      //update the order for each card in destination list
+      destinationList.forEach((card, i) => {
+        card.order = i;
+      });
     }
 
     const sortedIssues = newOrderedData.sort((a, b) => a.order - b.order);
     setIssues(newOrderedData, sortedIssues);
+
+    //api call
   };
 
   if (issuesError) return <div>Error Loading Issues</div>;
