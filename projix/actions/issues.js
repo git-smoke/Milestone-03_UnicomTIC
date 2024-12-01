@@ -50,7 +50,7 @@ export async function createIssue(projectId, data) {
   return issue;
 }
 
-export async function getIssueForSprint(sprintId) {
+export async function getIssuesForSprint(sprintId) {
   const { userId, orgId } = auth();
 
   if (!userId || !orgId) {
