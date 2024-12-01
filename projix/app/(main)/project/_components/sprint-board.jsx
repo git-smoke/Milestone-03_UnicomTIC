@@ -32,6 +32,12 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     setData: setIssues,
   } = useFetch(getIssuesForSprint);
 
+  useEffect(() => {
+    if (currentSprint.id) {
+      fetchIssues(currentSprint.id);
+    }
+  }, [currentSprint.id]);
+
   const [filteredIssues, setFilteredIssues] = useState(issues);
 
   const handleIssueCreated = () => {
