@@ -11,6 +11,7 @@ import useFetch from "@/hooks/use-fetch";
 import { getIssuesForSprint } from "@/actions/issues";
 import { issue } from "@uiw/react-md-editor";
 import { BarLoader } from "react-spinners";
+import IssueCard from "@/components/issue-cards";
 
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
@@ -79,7 +80,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
                     </h3>
 
                     {/* Issues */}
-                    {filteredIssues
+                    {issues
                       ?.filter((issue) => issue.status === column.key)
                       .map((issue, index) => (
                         <Draggable
