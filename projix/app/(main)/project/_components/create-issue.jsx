@@ -1,7 +1,7 @@
 "use client";
 
 import { createIssue } from "@/actions/issues";
-import { getOrganizationUsers } from "@/actions/organizations";
+import { getOrganizationUsers }   from "@/actions/organizations";
 import { issueSchema } from "@/app/lib/validators";
 import {
   Drawer,
@@ -95,12 +95,11 @@ const IssueCreationDrawer = ({
                   <SelectValue placeholder="Select assignee" />
                 </SelectTrigger>
                 <SelectContent>
-                  {Array.isArray(users) &&
-                    users?.map((user) => (
-                      <SelectItem key={user.id} value={user.id}>
-                        {user?.name}
-                      </SelectItem>
-                    ))}
+                  {users?.map((user) => (
+                    <SelectItem key={user.id} value={user.id}>
+                      {user?.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             )}
