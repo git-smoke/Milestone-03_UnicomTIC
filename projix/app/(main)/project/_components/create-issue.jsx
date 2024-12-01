@@ -25,6 +25,7 @@ import { Plus } from "lucide-react";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BarLoader } from "react-spinners";
+import { toast } from "sonner";
 
 const IssueCreationDrawer = ({
   isOpen,
@@ -62,6 +63,7 @@ const IssueCreationDrawer = ({
       reset();
       onClose();
       onIssueCreated();
+      toast.success("Issue Created Succesfully");
     }
   }, [newIssue, createIssueLoading]);
   const {
