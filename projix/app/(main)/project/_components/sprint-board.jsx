@@ -44,6 +44,8 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     fetchIssues(currentSprint.id);
   };
 
+  if (issuesError) return <div>Error Loading Issues</div>;
+
   const onDragEnd = () => {};
 
   return (
