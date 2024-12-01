@@ -40,6 +40,7 @@ const IssueCreationDrawer = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(issueSchema),
     defaultValues: {
@@ -56,10 +57,13 @@ const IssueCreationDrawer = ({
     data: newIssue,
   } = useFetch(createIssue);
 
-  useEffect( () => {
-
-  },[]);
-
+  useEffect(() => {
+    if (newIssue) {
+      reset(); // Correct way to call reset
+      onClose(); // Make sure to call onClose to close the drawer
+      onIssueCreated(); // Call the callback to refresh the issue list
+    }
+  }, [newIssue, createIssueLoading, reset, onClose, onIssueCreated]);
   const {
     loading: usersLoading,
     fn: fetchUsers,
@@ -136,7 +140,7 @@ const IssueCreationDrawer = ({
               Description
             </label>
             <Controller
-              name="assigneeId"
+              name="description"
               control={control}
               render={({ field }) => (
                 <MDEditor value={field.value} onChange={field.onChange} />
