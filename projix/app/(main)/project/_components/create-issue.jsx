@@ -59,11 +59,11 @@ const IssueCreationDrawer = ({
 
   useEffect(() => {
     if (newIssue) {
-      reset(); // Correct way to call reset
-      onClose(); // Make sure to call onClose to close the drawer
-      onIssueCreated(); // Call the callback to refresh the issue list
+      reset();
+      onClose();
+      onIssueCreated();
     }
-  }, [newIssue, createIssueLoading, reset, onClose, onIssueCreated]);
+  }, [newIssue, createIssueLoading]);
   const {
     loading: usersLoading,
     fn: fetchUsers,
