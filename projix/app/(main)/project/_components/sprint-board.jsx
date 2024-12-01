@@ -55,6 +55,8 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     fetchIssues(currentSprint.id);
   };
 
+  useFetch();
+
   const onDragEnd = async (result) => {
     if (currentSprint.status === "PLANNED") {
       toast.warning("Start the sprint to update board");
