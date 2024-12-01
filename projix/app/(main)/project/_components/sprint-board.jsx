@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import SprintManager from "./sprint-manager";
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import statuses from "@/data/statuses";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -79,9 +79,27 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
                     </h3>
 
                     {/* Issues */}
-                    {filteredIssues?.filter(
-                      (issue) => issue.status === column.key
-                    )}
+                    {filteredIssues
+                      ?.filter((issue) => issue.status === column.key)
+                      .map((issue, index) => (
+                        <Draggable
+                          key={issue.id}
+                          draggableId={issue.id}
+                          index={index}
+                        >
+                          {(provided) => {
+                            return (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <IssueCard issue={issue} />
+                              </div>
+                            );
+                          }}
+                        </Draggable>
+                      ))}
 
                     {provided.placeholder}
                     {column.key === "TODO" &&
