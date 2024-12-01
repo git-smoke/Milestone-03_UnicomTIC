@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import IssueCreationDrawer from "./create-issue";
 import useFetch from "@/hooks/use-fetch";
-import { getIssuesForSprint } from "@/actions/issues";
+import { getIssuesForSprint, updateIssueOrder } from "@/actions/issues";
 import { issue } from "@uiw/react-md-editor";
 import { BarLoader } from "react-spinners";
 import IssueCard from "@/components/issue-cards";
@@ -55,7 +55,11 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     fetchIssues(currentSprint.id);
   };
 
-  useFetch();
+  const {
+    fn: updateIssueOrderfn,
+    loading: updateIssuesLoading,
+    error: updateIssuesError,
+  } = useFetch(updateIssueOrder);
 
   const onDragEnd = async (result) => {
     if (currentSprint.status === "PLANNED") {
