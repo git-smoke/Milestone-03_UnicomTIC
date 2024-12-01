@@ -68,3 +68,13 @@ export async function getIssuesForSprint(sprintId) {
 
   return issues;
 }
+
+export async function updateIssueOrder(updatedIssues) {
+  const { userId, orgId } = auth();
+
+  if (!userId || !orgId) {
+    throw new Error("Unauthorized");
+  }
+
+  await db.$transaction(  )
+}
