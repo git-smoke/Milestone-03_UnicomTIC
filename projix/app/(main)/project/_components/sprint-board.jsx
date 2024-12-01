@@ -41,7 +41,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [filteredIssues, setFilteredIssues] = useState(issues);
 
   const handleIssueCreated = () => {
-    // fetch issues again
+    fetchIssues(currentSprint.id);
   };
 
   const onDragEnd = () => {};
