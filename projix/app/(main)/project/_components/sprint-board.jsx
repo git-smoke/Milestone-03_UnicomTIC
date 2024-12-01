@@ -14,6 +14,14 @@ import { BarLoader } from "react-spinners";
 import IssueCard from "@/components/issue-cards";
 import { toast } from "sonner";
 
+const reOrder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
     sprints.find((spr) => spr.status === "ACTIVE") || sprints[0]
@@ -80,6 +88,22 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     const destinationList = newOrderedData.filter(
       (list) => list.status === destination.droppableId
     );
+
+    //if source and dest same
+    if (source.droppableId === destination.droppableId) {
+      const reorderedCards = reOrder(
+        sourceList,
+        source.index,
+        destination.index
+      );
+
+      reorderedCards.forEach((card, i) => {
+        card.order = i;
+      });
+    }
+
+    const sortedIssues = newOrderedData.sort((a, b) => a.order - b.order);
+    setIssues(newOrderedData, sortedIssues);
   };
 
   if (issuesError) return <div>Error Loading Issues</div>;
