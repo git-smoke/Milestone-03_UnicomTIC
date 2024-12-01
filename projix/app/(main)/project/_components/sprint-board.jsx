@@ -6,18 +6,23 @@ import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import statuses from "@/data/statuses";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import IssueCreationDrawer from "./create-issue";
 
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
     sprints.find((spr) => spr.status === "ACTIVE") || sprints[0]
   );
 
-  const [isDrawerOpen, setIdDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectStatus, setSelectedStatus] = useState(null);
 
   const handleAddIssue = (status) => {
     setSelectedStatus(status);
-    setIdDrawerOpen(true);
+    setIsDrawerOpen(true);
+  };
+
+  const handleIssueCreated = () => {
+    // fetch issues again
   };
 
   const onDragEnd = () => {};
@@ -69,6 +74,16 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
           ))}
         </div>
       </DragDropContext>
+
+      <IssueCreationDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        sprintId={currentSprint.id}
+        status={selectStatus}
+        projectId={projectId}
+        onIssueCreated={handleIssueCreated}
+        orgId={orgId}
+      />
     </div>
   );
 };
