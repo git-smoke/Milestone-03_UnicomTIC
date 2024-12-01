@@ -73,7 +73,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
 
     //source and destination list
 
-    const sourccList = newOrderedData.filter(
+    const sourceList = newOrderedData.filter(
       (list) => list.status === source.droppableId
     );
 
