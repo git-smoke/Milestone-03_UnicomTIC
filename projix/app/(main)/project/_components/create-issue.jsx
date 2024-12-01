@@ -1,5 +1,9 @@
 "use client";
 
+import { issueSchema } from "@/app/lib/validators";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 const {
   Drawer,
   DrawerTrigger,
@@ -17,6 +21,15 @@ const IssueCreationDrawer = ({
   onIssueCreated,
   orgId,
 }) => {
+
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: {errors},} = useForm({
+            resolver: zodResolver(issueSchema)
+        })
+    }
   return (
     <Drawer open={isOpen} onClose={onClose}>
       <DrawerContent>
