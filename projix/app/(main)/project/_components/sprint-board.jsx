@@ -105,7 +105,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
       const [moveCard] = sourceList.splice(source.index, 1);
 
       //assign the new list id to the moved card
-      movedCard.status = destination.droppableId;
+      moveCard.status = destination.droppableId;
 
       //add new card to the destinationlist
       destinationList.splice(destination.index, 0, moveCard);
@@ -123,7 +123,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     const sortedIssues = newOrderedData.sort((a, b) => a.order - b.order);
     setIssues(newOrderedData, sortedIssues);
 
-    //api call
+    //updateIssueOrder(sortedIssues);
   };
 
   if (issuesError) return <div>Error Loading Issues</div>;
