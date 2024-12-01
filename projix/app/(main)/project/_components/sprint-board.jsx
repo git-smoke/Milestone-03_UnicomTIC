@@ -129,7 +129,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     const sortedIssues = newOrderedData.sort((a, b) => a.order - b.order);
     setIssues(newOrderedData, sortedIssues);
 
-    //updateIssueOrder(sortedIssues);
+    updateIssueOrderfn(sortedIssues);
   };
 
   if (issuesError) return <div>Error Loading Issues</div>;
