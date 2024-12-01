@@ -144,7 +144,10 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
         projectId={projectId}
       />
 
-      {issuesLoading && (
+      {updateIssuesError && (
+        <p className="text-red-500 mt-2">{updateIssuesError.message}</p>
+      )}
+      {(updateIssuesLoading || issuesLoading) && (
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
       )}
       {/* Kandban Board */}
