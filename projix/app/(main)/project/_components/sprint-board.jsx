@@ -7,6 +7,9 @@ import statuses from "@/data/statuses";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import IssueCreationDrawer from "./create-issue";
+import useFetch from "@/hooks/use-fetch";
+import { getIssuesForSprint } from "@/actions/issues";
+import { issue } from "@uiw/react-md-editor";
 
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
@@ -20,6 +23,16 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     setSelectedStatus(status);
     setIsDrawerOpen(true);
   };
+
+  const {
+    loading: issuesLoading,
+    error: issuesError,
+    fn: fetchIssues,
+    data: issues,
+    setData: setIssues,
+  } = useFetch(getIssuesForSprint);
+
+  const [filteredIssues, setFilteredIssues] = useState(issues);
 
   const handleIssueCreated = () => {
     // fetch issues again
