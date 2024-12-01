@@ -70,6 +70,16 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     }
 
     const newOrderedData = [...issues];
+
+    //source and destination list
+
+    const sourccList = newOrderedData.filter(
+      (list) => list.status === source.droppableId
+    );
+
+    const destinationList = newOrderedData.filter(
+      (list) => list.status === destination.droppableId
+    );
   };
 
   if (issuesError) return <div>Error Loading Issues</div>;
