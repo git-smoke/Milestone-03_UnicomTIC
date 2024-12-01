@@ -14,7 +14,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
   );
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [selectStatus, setSelectedStatus] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
 
   const handleAddIssue = (status) => {
     setSelectedStatus(status);
@@ -79,7 +79,7 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         sprintId={currentSprint.id}
-        status={selectStatus}
+        status={selectedStatus}
         projectId={projectId}
         onIssueCreated={handleIssueCreated}
         orgId={orgId}
