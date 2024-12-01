@@ -1,5 +1,12 @@
 import { Badge } from "./ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import UserAvatar from "./user-avatar";
 
 const priorityColor = {
   LOW: "border-green-600",
@@ -26,6 +33,9 @@ const IssueCard = ({
             {issue.priority}
           </Badge>
         </CardContent>
+        <CardFooter>
+          <UserAvatar user={user.assignee} />
+        </CardFooter>
       </Card>
     </>
   );
