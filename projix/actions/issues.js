@@ -26,7 +26,8 @@ export async function createIssue(projectId, data) {
     },
   });
 
-  const newOrder = lastIssue ? lastIssue.order : 0;
+  // Increment the order, starting from 0 if no previous issues exist
+  const newOrder = lastIssue ? lastIssue.order + 1 : 0;
 
   const issue = await db.issue.create({
     data: {
@@ -45,4 +46,6 @@ export async function createIssue(projectId, data) {
       reporter: true,
     },
   });
+
+  return issue; 
 }
