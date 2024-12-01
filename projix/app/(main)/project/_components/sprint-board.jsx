@@ -79,6 +79,9 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
                     </h3>
 
                     {/* Issues */}
+                    {filteredIssues?.filter(
+                      (issue) => issue.status === column.key
+                    )}
 
                     {provided.placeholder}
                     {column.key === "TODO" &&
