@@ -12,6 +12,7 @@ import { getIssuesForSprint } from "@/actions/issues";
 import { issue } from "@uiw/react-md-editor";
 import { BarLoader } from "react-spinners";
 import IssueCard from "@/components/issue-cards";
+import { toast } from "sonner";
 
 const SprintBoard = ({ sprints, projectId, orgId }) => {
   const [currentSprint, setCurrentSprint] = useState(
@@ -46,9 +47,32 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     fetchIssues(currentSprint.id);
   };
 
-  if (issuesError) return <div>Error Loading Issues</div>;
+  const onDragEnd = async (result) => {
+    if (currentSprint.status === "PLANNED") {
+      toast.warning("Start the sprint to update board");
+      return;
+    }
+    if (currentSprint.status === "COMPLETED") {
+      toast.warning("Cannot update board after sprint end");
+      return;
+    }
 
-  const onDragEnd = () => {};
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const newOrderedData = [...issues];
+  };
+
+  if (issuesError) return <div>Error Loading Issues</div>;
 
   return (
     <div>
