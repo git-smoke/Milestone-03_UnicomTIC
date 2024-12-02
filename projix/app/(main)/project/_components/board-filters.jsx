@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-const BoardFilters = () => {
+const BoardFilters = ({ issues, onFilterChange }) => {
+  useState();
+  useState();
+  useState();
+
   return <div>BoardFilters</div>;
 };
 
