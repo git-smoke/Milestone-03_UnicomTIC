@@ -14,6 +14,9 @@ import useFetch from "@/hooks/use-fetch";
 import { deleteIssue, updateIssue } from "@/actions/issues";
 import { BarLoader } from "react-spinners";
 
+
+const priorityOptions = ["LOW", "MEDIUM", "HIGH", "URGENT"];
+
 const IssueDetailsDialog = ({
   isOpen,
   onClose,
@@ -74,6 +77,9 @@ const IssueDetailsDialog = ({
         {(updateLoading || deleteLoading) && (
           <BarLoader width={"100%"} color="#36d7b7" />
         )}
+        <div>
+          <div></div>
+        </div>
       </DialogContent>
     </Dialog>
   );
