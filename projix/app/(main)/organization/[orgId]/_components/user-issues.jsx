@@ -1,3 +1,4 @@
+import IssueCard from "@/components/issue-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const UserIssues = ({ userId }) => {
@@ -18,5 +19,15 @@ const UserIssues = ({ userId }) => {
     </>
   );
 };
+
+function IssueGrid({ issues }) {
+  return (
+    <div>
+      {issues.map((issue) => (
+        <IssueCard key={issue.id} issue={issue} showStatus />
+      ))}
+    </div>
+  );
+}
 
 export default UserIssues;
