@@ -7,6 +7,8 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { usePathname } from "next/navigation";
+import { Button } from "./ui/button";
+import { ExternalLink } from "lucide-react";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -27,6 +29,16 @@ const IssueDetailsDialog = ({
           <div className="flex justify-between items-centers">
             <DialogTitle className="text-3xl">{issue.title}</DialogTitle>
           </div>
+          {!isProjectpage && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleGoToProject}
+              title="Go to Project"
+            >
+                <ExternalLink className="h-4 w-4"/>
+            </Button>
+          )}
         </DialogHeader>
       </DialogContent>
     </Dialog>
