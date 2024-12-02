@@ -1,20 +1,42 @@
+import { getuserIssues } from "@/actions/issues";
 import IssueCard from "@/components/issue-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Suspense } from "react";
 
-const UserIssues = ({ userId }) => {
+const UserIssues = async ({ userId }) => {
+  const issues = await getuserIssues(userId);
+
+  if (issues.length === 0) {
+    return null;
+  }
+
+  const assignedIssues = issues.filter(
+    (issue) => issue.assignee.clerkUserId === userId
+  );
+
+  const reportedIssues = issues.filter(
+    (issue) => issue.reporter.clerkUserId === userId
+  );
+
   return (
     <>
       <h1 className="text-4xl font-bold gradient-title mb-4">My Issues</h1>
 
-      <Tabs defaultValue="account" className="w-[400px]">
+      <Tabs defaultValue="assigned" className="w-[400px]">
         <TabsList>
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
+          <TabsTrigger value="assigned">Assigned to You</TabsTrigger>
+          <TabsTrigger value="reported">Reported by You</TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
-          Make changes to your account here
+        <TabsContent value="assigned">
+          <Suspense fallback={<div>Loading...</div>}>
+            <IssueGrid issues={assignedIssues} />
+          </Suspense>
         </TabsContent>
-        <TabsContent value="password">Change your password here.</TabsContent>
+        <TabsContent value="reported">
+          <Suspense fallback={<div>Loading...</div>}>
+            <IssueGrid issues={reportedIssues} />
+          </Suspense>
+        </TabsContent>
       </Tabs>
     </>
   );
