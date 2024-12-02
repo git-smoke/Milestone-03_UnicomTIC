@@ -183,7 +183,19 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                <IssueCard issue={issue} />
+                                <IssueCard
+                                  issue={issue}
+                                  onDelete={() => fetchIssues(currentSprint.id)}
+                                  onUpdate={(updated) =>
+                                    setIssues((issues) =>
+                                      issues.map((issue) => {
+                                        if (issue.id === updated.id)
+                                          return updated;
+                                        return issue;
+                                      })
+                                    )
+                                  }
+                                />
                               </div>
                             );
                           }}
