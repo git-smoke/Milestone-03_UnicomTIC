@@ -13,6 +13,7 @@ import { issue } from "@uiw/react-md-editor";
 import { BarLoader } from "react-spinners";
 import IssueCard from "@/components/issue-cards";
 import { toast } from "sonner";
+import BoardFilters from "./board-filters";
 
 const reOrder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
