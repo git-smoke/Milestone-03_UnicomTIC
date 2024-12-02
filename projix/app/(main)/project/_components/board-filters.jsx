@@ -1,9 +1,16 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import React, { useState } from "react";
 
 const BoardFilters = ({ issues, onFilterChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAssignees, setSelectedAssignees] = useState([]);
   cosnt[(selectedPriority, setSelectedPriority)] = useState("");
+
+  const assignees = issues
+    .map((issue) => issue.assignee)
+    .filter(
+      (item, index, self) => index === self.findIndex((t) => t.id === item.id)
+    );
 
   return (
     <div>
@@ -14,7 +21,20 @@ const BoardFilters = ({ issues, onFilterChange }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="flex-shrink-0"></div>
+        <div className="flex-shrink-0">
+          <div className="">
+            {assignees.map((assignee, i) => {
+              return (
+                <div>
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={assignee.imageUrl} />
+                    <AvatarFallback>{assignee.name[0]}</AvatarFallback>
+                  </Avatar>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
