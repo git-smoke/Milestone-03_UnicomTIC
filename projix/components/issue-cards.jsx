@@ -13,6 +13,7 @@ import { formatDistanceToNow } from "date-fns";
 // import IssueDetailsDialog from "./issue-details-dialog";
 import UserAvatar from "./user-avatar";
 import { useRouter } from "next/navigation";
+import IssueDetailsDialog from "./issue-details-dialog";
 
 const priorityColor = {
   LOW: "border-green-600",
