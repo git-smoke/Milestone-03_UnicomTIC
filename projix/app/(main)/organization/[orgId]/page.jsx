@@ -4,12 +4,17 @@ import React from "react";
 import ProjectList from "./_components/project-list";
 import UserIssues from "./_components/user-issues";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const Organization = async ({ params }) => {
   const { orgId } = params;
   const { userId } = auth();
 
   const organization = await getOrganization(orgId);
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   if (!organization) {
     return <div>Organization Not Found</div>;
