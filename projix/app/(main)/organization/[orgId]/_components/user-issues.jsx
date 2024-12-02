@@ -1,4 +1,4 @@
-import { getuserIssues } from "@/actions/issues";
+import { getuserIssues, getUserIssues } from "@/actions/issues";
 import IssueCard from "@/components/issue-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Suspense } from "react";
@@ -22,7 +22,7 @@ const UserIssues = async ({ userId }) => {
     <>
       <h1 className="text-4xl font-bold gradient-title mb-4">My Issues</h1>
 
-      <Tabs defaultValue="assigned" className="w-[400px]">
+      <Tabs defaultValue="assigned" className="w-full">
         <TabsList>
           <TabsTrigger value="assigned">Assigned to You</TabsTrigger>
           <TabsTrigger value="reported">Reported by You</TabsTrigger>
@@ -44,7 +44,7 @@ const UserIssues = async ({ userId }) => {
 
 function IssueGrid({ issues }) {
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {issues.map((issue) => (
         <IssueCard key={issue.id} issue={issue} showStatus />
       ))}
