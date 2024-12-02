@@ -12,6 +12,7 @@ import { ExternalLink } from "lucide-react";
 import { useOrganization, useUser } from "@clerk/nextjs";
 import useFetch from "@/hooks/use-fetch";
 import { deleteIssue, updateIssue } from "@/actions/issues";
+import { BarLoader } from "react-spinners";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -70,6 +71,9 @@ const IssueDetailsDialog = ({
             </Button>
           )}
         </DialogHeader>
+        {(updateLoading || deleteLoading) && (
+          <BarLoader width={"100%"} color="#36d7b7" />
+        )}
       </DialogContent>
     </Dialog>
   );
