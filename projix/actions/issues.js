@@ -175,3 +175,5 @@ export async function updateIssue(issueId, data) {
     throw new Error("Error updating issue: " + error.message);
   }
 }
+
+export async function getuserIssues(userId) {}
