@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { ExternalLink } from "lucide-react";
 import { useOrganization, useUser } from "@clerk/nextjs";
 import useFetch from "@/hooks/use-fetch";
-import { deleteIssue } from "@/actions/issues";
+import { deleteIssue, updateIssue } from "@/actions/issues";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -36,7 +36,12 @@ const IssueDetailsDialog = ({
     data: deleted,
   } = useFetch(deleteIssue);
 
-  const {} = useFetch();
+  const {
+    loading: updateLoading,
+    error: updateError,
+    fn: updateIssuefn,
+    data: updated,
+  } = useFetch(updateIssue);
 
   const handleGoToProject = () => {
     router.push(`/project/${issue.projectId}?sprint=${issue.sprintId}`);
