@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { usePathname } from "next/navigation";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -15,6 +16,8 @@ const IssueDetailsDialog = ({
   onUpdate = () => {},
   borderCol = "",
 }) => {
+  const pathname = usePathname();
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
