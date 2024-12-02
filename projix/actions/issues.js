@@ -190,4 +190,23 @@ export async function getuserIssues(userId) {
   if (!user) {
     throw new Error("User not found");
   }
+
+  const issues = await db.issue.findMany({
+    where: {
+      OR: [{ assigneeId: user.id }, { reporterId: user.id }],
+      project: {
+        organizationId: orgId,
+      },
+    },
+    include: {
+      project: true,
+      assignee: true,
+      reporter: true,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+  });
+
+  return issues;
 }
