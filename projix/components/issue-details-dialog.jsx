@@ -18,7 +18,7 @@ const IssueDetailsDialog = ({
   onUpdate = () => {},
   borderCol = "",
 }) => {
-  const [] = useState();
+  const [status, setStatus] = useState(issue.status);
   const [] = useState();
 
   const pathname = usePathname();
