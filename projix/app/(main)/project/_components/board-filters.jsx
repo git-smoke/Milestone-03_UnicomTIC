@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 const BoardFilters = ({ issues, onFilterChange }) => {
-  useState();
-  useState();
-  useState();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedAssignees, setSelectedAssignees] = useState([]);
+  cosnt[(selectedPriority, setSelectedPriority)] = useState("");
 
   return <div>BoardFilters</div>;
 };
