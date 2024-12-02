@@ -51,6 +51,10 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
 
   const [filteredIssues, setFilteredIssues] = useState(issues);
 
+  const handleFilterChange = (newFilteredIssues) => {
+    setFilteredIssues(newFilteredIssues);
+  };
+
   const handleIssueCreated = () => {
     fetchIssues(currentSprint.id);
   };
