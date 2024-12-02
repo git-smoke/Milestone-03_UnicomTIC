@@ -176,4 +176,18 @@ export async function updateIssue(issueId, data) {
   }
 }
 
-export async function getuserIssues(userId) {}
+export async function getuserIssues(userId) {
+  const { orgId } = auth();
+
+  if (!userId || !orgId) {
+    throw new Error("No user id or organization id found");
+  }
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+}
