@@ -83,6 +83,8 @@ export default function SprintManager({
     }
   }, [searchParams, sprints]);
 
+  
+
   const handleSprintChange = (value) => {
     const selectedSprint = sprints.find((s) => s.id === value);
     setSprint(selectedSprint);
