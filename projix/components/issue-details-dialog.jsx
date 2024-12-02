@@ -21,6 +21,10 @@ const IssueDetailsDialog = ({
   const pathname = usePathname();
   const router = useRouter();
 
+  const handleGoToProject = () => {
+    router.push(`/project/${issue.projectId}?sprint=${issue.sprintId}`);
+  };
+
   const isProjectpage = pathname.startsWith("/project/");
 
   return (
@@ -37,7 +41,7 @@ const IssueDetailsDialog = ({
               onClick={handleGoToProject}
               title="Go to Project"
             >
-                <ExternalLink className="h-4 w-4"/>
+              <ExternalLink className="h-4 w-4" />
             </Button>
           )}
         </DialogHeader>
