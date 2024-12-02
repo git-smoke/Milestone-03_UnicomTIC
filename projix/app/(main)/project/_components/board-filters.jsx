@@ -12,10 +12,9 @@ const BoardFilters = ({ issues, onFilterChange }) => {
           className="w-full sm:w-72"
           placeholder="Search Issues..."
           value={searchTerm}
-          onChange={
-            (e) => setSearchTerm(e.target.value)
-          }
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <div className="flex-shrink-0"></div>
       </div>
     </div>
   );
