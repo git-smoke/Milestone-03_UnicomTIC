@@ -1,6 +1,4 @@
-import React from "react";
-
-const UserIssues = () => {
+const UserIssues = ({ userId }) => {
   return <div>UserIssues</div>;
 };
 

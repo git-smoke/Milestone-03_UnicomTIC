@@ -3,9 +3,11 @@ import OrgSwitcher from "@/components/org-switcher";
 import React from "react";
 import ProjectList from "./_components/project-list";
 import UserIssues from "./_components/user-issues";
+import { auth } from "@clerk/nextjs/server";
 
 const Organization = async ({ params }) => {
   const { orgId } = params;
+  const { userId } = auth();
 
   const organization = await getOrganization(orgId);
 
