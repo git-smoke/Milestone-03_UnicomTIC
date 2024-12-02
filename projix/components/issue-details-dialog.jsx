@@ -19,7 +19,7 @@ const IssueDetailsDialog = ({
   borderCol = "",
 }) => {
   const [status, setStatus] = useState(issue.status);
-  const [] = useState();
+  const [priority, setPriority] = useState(issue.priority);
 
   const pathname = usePathname();
   const router = useRouter();
