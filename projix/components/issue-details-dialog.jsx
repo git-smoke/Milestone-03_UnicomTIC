@@ -9,6 +9,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { ExternalLink } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -21,6 +22,7 @@ const IssueDetailsDialog = ({
   const [status, setStatus] = useState(issue.status);
   const [priority, setPriority] = useState(issue.priority);
 
+  const {} = useUser();
   const pathname = usePathname();
   const router = useRouter();
 
