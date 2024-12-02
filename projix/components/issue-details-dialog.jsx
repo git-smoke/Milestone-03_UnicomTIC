@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +18,9 @@ const IssueDetailsDialog = ({
   onUpdate = () => {},
   borderCol = "",
 }) => {
+  const [] = useState();
+  const [] = useState();
+
   const pathname = usePathname();
   const router = useRouter();
 
