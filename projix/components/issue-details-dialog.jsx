@@ -10,6 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { ExternalLink } from "lucide-react";
 import { useOrganization, useUser } from "@clerk/nextjs";
+import useFetch from "@/hooks/use-fetch";
 
 const IssueDetailsDialog = ({
   isOpen,
@@ -26,6 +27,8 @@ const IssueDetailsDialog = ({
   const { membership } = useOrganization();
   const pathname = usePathname();
   const router = useRouter();
+
+  useFetch();
 
   const handleGoToProject = () => {
     router.push(`/project/${issue.projectId}?sprint=${issue.sprintId}`);
