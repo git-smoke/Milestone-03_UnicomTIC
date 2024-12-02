@@ -9,8 +9,8 @@ import { redirect } from "next/navigation";
 const Organization = async ({ params }) => {
   const { orgId } = params;
   const { userId } = auth();
-
   const organization = await getOrganization(orgId);
+
 
   if (!userId) {
     redirect("/sign-in");
