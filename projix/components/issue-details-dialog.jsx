@@ -18,6 +18,8 @@ const IssueDetailsDialog = ({
 }) => {
   const pathname = usePathname();
 
+  const isProjectpage = pathname.startsWith("/project/");
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
