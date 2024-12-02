@@ -176,7 +176,7 @@ export async function updateIssue(issueId, data) {
   }
 }
 
-export async function getuserIssues(userId) {
+export async function getUserIssues(userId) {
   const { orgId } = auth();
 
   if (!userId || !orgId) {
