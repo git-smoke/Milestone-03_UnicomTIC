@@ -43,6 +43,9 @@ const IssueDetailsDialog = ({
     data: updated,
   } = useFetch(updateIssue);
 
+  const canChange =
+    user.id === issue.reporter.clerkUserId || membership.role === "org:admin";
+
   const handleGoToProject = () => {
     router.push(`/project/${issue.projectId}?sprint=${issue.sprintId}`);
   };
