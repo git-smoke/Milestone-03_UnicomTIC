@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { ExternalLink } from "lucide-react";
 
@@ -19,6 +19,7 @@ const IssueDetailsDialog = ({
   borderCol = "",
 }) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const isProjectpage = pathname.startsWith("/project/");
 
