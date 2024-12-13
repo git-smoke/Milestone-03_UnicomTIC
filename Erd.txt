@@ -1,0 +1,71 @@
+erDiagram
+    User ||--o{ Issue : "reports/assigns"
+    Project ||--o{ Issue : "contains"
+    Project ||--o{ Sprint : "has"
+    Sprint ||--o{ Issue : "includes"
+
+    User {
+        string id PK
+        string clerkUserId
+        string email
+        string name
+        string imageUrl
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Project {
+        string id PK
+        string name
+        string key
+        string description
+        string organizationId
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Sprint {
+        string id PK
+        string name
+        datetime startDate
+        datetime endDate
+        SprintStatus status
+        string projectId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Issue {
+        string id PK
+        string title
+        string description
+        IssueStatus status
+        int order
+        IssuePriority priority
+        string assigneeId FK
+        string reporterId FK
+        string projectId FK
+        string sprintId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    enum SprintStatus {
+        PLANNED
+        ACTIVE
+        COMPLETED
+    }
+
+    enum IssueStatus {
+        TODO
+        IN_PROGRESS
+        IN_REVIEW
+        DONE
+    }
+
+    enum IssuePriority {
+        LOW
+        MEDIUM
+        HIGH
+        URGENT
+    }
